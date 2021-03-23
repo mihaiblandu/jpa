@@ -10,9 +10,10 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Dataset {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Integer id;
-    public String set;
+    private Integer id;
+
+    private String name;
 }
