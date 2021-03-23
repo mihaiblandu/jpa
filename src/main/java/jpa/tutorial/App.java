@@ -1,5 +1,7 @@
 package jpa.tutorial;
 
+import jpa.tutorial.dao.UniversityLazyRepo;
+import jpa.tutorial.dao.UniversityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
