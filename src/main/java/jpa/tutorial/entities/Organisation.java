@@ -1,15 +1,13 @@
 package jpa.tutorial.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Data
-public class UniversityLazy {
+public class Organisation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,8 +17,7 @@ public class UniversityLazy {
 
     private String address;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @BatchSize(size=16)
-    private List<Student> students;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="organisation")
+    private List<Person> people;
 
 }
