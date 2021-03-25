@@ -1,5 +1,6 @@
 package jpa.tutorial.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ public class EntityB {
   private int myIdB;
   private String strB;
   @ManyToOne
+  @JsonIgnore
   @JoinTable(name = "MY_JOIN_TABLE",
           joinColumns = {@JoinColumn(name = "MY_ENTITY_B_FK", insertable = false,
                   updatable = false, referencedColumnName = "myIdB")},

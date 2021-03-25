@@ -3,6 +3,7 @@ package jpa.tutorial.config;
 import com.github.javafaker.Faker;
 import jpa.tutorial.dao.*;
 import jpa.tutorial.entities.*;
+import jpa.tutorial.repo.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -33,6 +35,8 @@ public class AppStartupRunner implements ApplicationRunner {
     private EntityARepo entityARepo;
     @Autowired
     private EntityBRepo entityBRepo;
+    @Autowired
+    private UserRepository userRepository;
     @Override
     public void run(ApplicationArguments args) throws Exception {
         logger.info("Your application started with option names : {}", args.getOptionNames());
@@ -89,5 +93,13 @@ public class AppStartupRunner implements ApplicationRunner {
             return entityA;
         }).collect(Collectors.toList());
         entityARepo.saveAll(listA);
+        userRepository.deleteAllInBatch();
+
+        // Insert a new user in the database
+        Name name = new Name("Mihai", "Mihail", "Blandu");
+        Address address = new Address("33", "Tudorescu", "Bucuresti", "----", "Romania", "xx");
+        User user = new User(name, "mihaiblandu@mihaiblandu.tk", address);
+
+        userRepository.save(user);
     }
 }
