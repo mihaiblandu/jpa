@@ -9,8 +9,7 @@ import java.math.BigDecimal;
 @Table(name = "meal")
 @Data
 @SecondaryTable(name = "allergens", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
-public
-class Meal {
+public class Meal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
