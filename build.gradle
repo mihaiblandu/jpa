@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.google.guava:guava:29.0-jre'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'junit:junit:4.12'
     compile group: 'com.github.javafaker', name: 'javafaker', version: '0.15'
     implementation 'com.h2database:h2'
 
