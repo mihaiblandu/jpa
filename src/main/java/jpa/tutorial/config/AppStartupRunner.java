@@ -62,13 +62,13 @@ public class AppStartupRunner implements ApplicationRunner {
         unLazy.setStudents(students);
         universityRepo.save(un);
         universityLazyRepo.save(unLazy);*/
-        List<Organisation> list = IntStream.range(1,100).mapToObj(i->{
+        List<Organisation> list = IntStream.range(1,10).mapToObj(i->{
             Organisation organisation = new Organisation();
             //organisation.setId(i);
             organisation.setName(faker.company().name());
             organisation.setAddress(faker.address().fullAddress());
             organisationRepo.save(organisation);
-            organisation.setPeople(IntStream.range(1,100).mapToObj(j->{
+            organisation.setPeople(IntStream.range(1,10).mapToObj(j->{
                 Person person = new Person();
                 //person.setId(j);
                 person.setName(faker.name().fullName());
@@ -80,7 +80,7 @@ public class AppStartupRunner implements ApplicationRunner {
         }).collect(Collectors.toList());
 
         organisationRepo.saveAll(list);
-        List<EntityA> listA = IntStream.range(1,100).mapToObj(i->{
+        List<EntityA> listA = IntStream.range(1,10).mapToObj(i->{
             EntityA entityA = new EntityA();
             entityA.setStrA(faker.space().company());
             List<EntityB> listB =IntStream.range(1,10).mapToObj(j->{
