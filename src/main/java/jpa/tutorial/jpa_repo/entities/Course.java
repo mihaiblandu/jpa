@@ -34,7 +34,7 @@ public class Course {
     @JsonIgnoreProperties("course")
     private List<Review> reviews = new ArrayList<>();
     @ManyToMany(mappedBy="courses")
-    @JsonIgnore
+    @JsonIgnoreProperties("courses")
     private List<StudentB> students = new ArrayList<>();
     public Course() {
     }

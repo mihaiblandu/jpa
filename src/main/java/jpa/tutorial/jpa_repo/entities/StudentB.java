@@ -1,5 +1,6 @@
 package jpa.tutorial.jpa_repo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,7 +34,11 @@ public class StudentB {
 
 
     @ManyToMany
-    @JoinTable(name = "STUDENT_COURSE", joinColumns = @JoinColumn(name = "STUDENT_ID"), inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
+    @JoinTable(
+            name = "course_student",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    @JsonIgnore
     private List<Course> courses = new ArrayList<>();
 
     protected StudentB() {
