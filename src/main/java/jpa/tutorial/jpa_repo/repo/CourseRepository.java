@@ -1,5 +1,6 @@
-package jpa.tutorial.jpa_repo;
+package jpa.tutorial.jpa_repo.repo;
 
+import jpa.tutorial.jpa_repo.entities.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +16,7 @@ public class CourseRepository {
     private EntityManager entityManager;
 
     public List<Course> findAll(){
-        TypedQuery<Course> namedQuery = entityManager.createNamedQuery("find_all_courses", Course.class);
+        TypedQuery<Course> namedQuery = entityManager.createNamedQuery("query_get_all_courses", Course.class);
         return namedQuery.getResultList();
     }
 

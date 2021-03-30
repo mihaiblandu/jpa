@@ -1,4 +1,4 @@
-package jpa.tutorial.jpa_repo;
+package jpa.tutorial.jpa_repo.entities;
 
 
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
-package jpa.tutorial.jpa_repo;
+package jpa.tutorial.jpa_repo.repo;
 
-import jpa.tutorial.jdbc.PersonJDBC;
+import jpa.tutorial.jpa_repo.entities.PersonJpa;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

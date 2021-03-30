@@ -1,9 +1,8 @@
 package jpa.tutorial.fetch;
 
 
-import jpa.tutorial.jpa_repo.PersonJpa;
-import jpa.tutorial.jpa_repo.PersonJpaRepository;
-import liquibase.pro.packaged.v;
+import jpa.tutorial.jpa_repo.entities.PersonJpa;
+import jpa.tutorial.jpa_repo.repo.PersonJpaRepository;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.core.annotation.Order;
 import org.junit.jupiter.api.Test;

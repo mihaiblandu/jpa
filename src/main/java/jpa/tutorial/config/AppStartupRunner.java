@@ -3,6 +3,9 @@ package jpa.tutorial.config;
 import com.github.javafaker.Faker;
 import jpa.tutorial.dao.*;
 import jpa.tutorial.entities.*;
+import jpa.tutorial.jpa_repo.entities.Passport;
+import jpa.tutorial.jpa_repo.entities.StudentB;
+import jpa.tutorial.jpa_repo.repo.StudentRepository;
 import jpa.tutorial.repo.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +40,8 @@ public class AppStartupRunner implements ApplicationRunner {
     private EntityBRepo entityBRepo;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private StudentRepository studentRepository;
     @Override
     public void run(ApplicationArguments args) throws Exception {
         logger.info("Your application started with option names : {}", args.getOptionNames());
@@ -101,5 +106,18 @@ public class AppStartupRunner implements ApplicationRunner {
         User user = new User(name, "mihaiblandu@mihaiblandu.tk", address);
 
         userRepository.save(user);
+
+
+        Passport passport = new Passport("123123");
+
+        StudentB studentB = new StudentB("jimmy");
+        studentRepository.save(studentB);
+
+        studentB.setAddress(new jpa.tutorial.jpa_repo.entities.Address("here","there","city"));
+        StudentB student = studentRepository.findAll().get(3);
+        passport.setStudent(student);
+        student.setPassport(passport);
+        studentRepository.update(student);
+
     }
 }
