@@ -1,0 +1,175 @@
+CREATE SEQUENCE SEQ_ID;
+CREATE SEQUENCE HIBERNATE_SEQUENCE;
+CREATE TABLE ENTITYA(
+    MY_IDA INTEGER NOT NULL,
+    STRA VARCHAR(255)
+);
+
+ALTER TABLE ENTITYA ADD CONSTRAINT CONSTRAINT_CA PRIMARY KEY(MY_IDA);
+
+CREATE TABLE ENTITYB(
+    MY_IDB INTEGER NOT NULL,
+    STRB VARCHAR(255)
+);
+
+ALTER TABLE ENTITYB ADD CONSTRAINT CONSTRAINT_CB PRIMARY KEY(MY_IDB);
+CREATE TABLE MY_JOIN_TABLE(
+    MY_ENTITY_A_FK INTEGER NOT NULL,
+    MY_ENTITY_B_FK INTEGER NOT NULL
+);
+ALTER TABLE MY_JOIN_TABLE ADD CONSTRAINT CONSTRAINT_JA PRIMARY KEY(MY_ENTITY_B_FK);
+
+CREATE TABLE ORGANISATION(
+    "ID" INTEGER NOT NULL,
+    "ADDRESS" VARCHAR(255),
+    "NAME" VARCHAR(255)
+);
+ALTER TABLE "ORGANISATION" ADD CONSTRAINT "CONSTRAINT_C4" PRIMARY KEY("ID");
+
+CREATE TABLE PERSON(
+    "ID" INTEGER NOT NULL SELECTIVITY 100,
+    "NAME" VARCHAR(255) SELECTIVITY 99,
+    "ORGANISATION_ID" INTEGER SELECTIVITY 1
+);
+--ALTER TABLE "PERSON" ADD CONSTRAINT"CONSTRAINT_8" PRIMARY KEY("ID");
+
+CREATE MEMORY TABLE "STUDENT"(
+    "ID" INTEGER NOT NULL,
+    "NAME" VARCHAR(255)
+);
+ALTER TABLE "STUDENT" ADD CONSTRAINT "CONSTRAINT_B" PRIMARY KEY("ID");
+-- 0 +/- SELECT COUNT(*) FROM STUDENT;
+CREATE TABLE"UNIVERSITY"(
+    "ID" INTEGER NOT NULL,
+    "ADDRESS" VARCHAR(255),
+    "NAME" VARCHAR(255)
+);
+ALTER TABLE "UNIVERSITY" ADD CONSTRAINT"CONSTRAINT_2" PRIMARY KEY("ID");
+-- 0 +/- SELECT COUNT(*) FROM UNIVERSITY;
+CREATE TABLE "UNIVERSITY_STUDENTS"(
+    "UNIVERSITY_ID" INTEGER NOT NULL,
+    "STUDENTS_ID" INTEGER NOT NULL
+);
+-- 0 +/- SELECT COUNT(*) FROM UNIVERSITY_STUDENTS;
+CREATE TABLE "UNIVERSITY_LAZY"(
+    "ID" INTEGER NOT NULL,
+    "ADDRESS" VARCHAR(255),
+    "NAME" VARCHAR(255)
+);
+ALTER TABLE "UNIVERSITY_LAZY" ADD CONSTRAINT "CONSTRAINT_4" PRIMARY KEY("ID");
+-- 0 +/- SELECT COUNT(*) FROM UNIVERSITY_LAZY;
+CREATE TABLE "UNIVERSITY_LAZY_STUDENTS"(
+    "UNIVERSITY_LAZY_ID" INTEGER NOT NULL,
+    "STUDENTS_ID" INTEGER NOT NULL
+);
+-- 0 +/- SELECT COUNT(*) FROM UNIVERSITY_LAZY_STUDENTS;
+ALTER TABLE "MY_JOIN_TABLE" ADD CONSTRAINT "FKITQ920VSSDR3KQW1KGY67OT9N" FOREIGN KEY("MY_ENTITY_A_FK") REFERENCES "ENTITYA"("MY_IDA") NOCHECK;
+ALTER TABLE "MY_JOIN_TABLE" ADD CONSTRAINT "FKM8GG8GGA9Y5H2UIKQ9FUMC6PK" FOREIGN KEY("MY_ENTITY_B_FK") REFERENCES "ENTITYB"("MY_IDB") NOCHECK;
+ALTER TABLE "UNIVERSITY_STUDENTS" ADD CONSTRAINT "UK_K2BCFUU9VXWNX0CQ872X3A4JU" UNIQUE("STUDENTS_ID");
+ALTER TABLE "UNIVERSITY_LAZY_STUDENTS" ADD CONSTRAINT "UK_O1J848WCIWE5RM0RR9DFCO2IH" UNIQUE("STUDENTS_ID");
+ALTER TABLE "UNIVERSITY_STUDENTS" ADD CONSTRAINT "FKKQBSDIFVIFASWSO2NRDBCJJAQ" FOREIGN KEY("UNIVERSITY_ID") REFERENCES "UNIVERSITY"("ID") NOCHECK;
+ALTER TABLE "PERSON" ADD CONSTRAINT "FKB4BYUY8J1CQ0Q8JK0QGNJWBSN" FOREIGN KEY("ORGANISATION_ID") REFERENCES "ORGANISATION"("ID") NOCHECK;
+ALTER TABLE "UNIVERSITY_STUDENTS" ADD CONSTRAINT "FKF6A31XSOU4XIVBO0QA8NEHOEQ" FOREIGN KEY("STUDENTS_ID") REFERENCES "STUDENT"("ID") NOCHECK;
+ALTER TABLE "UNIVERSITY_LAZY_STUDENTS" ADD CONSTRAINT "FKID55PEUTRBV1WU3O62BWP76IO" FOREIGN KEY("UNIVERSITY_LAZY_ID") REFERENCES "UNIVERSITY_LAZY"("ID") NOCHECK;
+ALTER TABLE "UNIVERSITY_LAZY_STUDENTS" ADD CONSTRAINT "FKJYBVX68CDH1EYD6BWA19QUWG9" FOREIGN KEY("STUDENTS_ID") REFERENCES "STUDENT"("ID") NOCHECK;
+
+CREATE TABLE Bank(
+    ID INTEGER NOT NULL,
+    Name VARCHAR(255),
+    Address VARCHAR(255)
+);
+
+ALTER TABLE Bank ADD CONSTRAINT CONSTRAINT_Bank_A PRIMARY KEY(ID);
+
+CREATE TABLE Customer(
+    ID INTEGER NOT NULL,
+    Name VARCHAR(255)
+);
+ALTER TABLE Customer ADD CONSTRAINT CONSTRAINT_Customer PRIMARY KEY(ID);
+
+CREATE TABLE Bank_Customer(
+    Bank_FK INTEGER NOT NULL,
+    Customer_FK INTEGER NOT NULL
+);
+
+ALTER TABLE Bank_Customer ADD CONSTRAINT CONSTRAINT_Bank_Customer PRIMARY KEY(Customer_FK);
+ALTER TABLE Bank_Customer ADD CONSTRAINT FK_Bank_Customer FOREIGN KEY(Bank_FK) REFERENCES Bank(ID) NOCHECK;
+ALTER TABLE Bank_Customer ADD CONSTRAINT FK_Customer_Bank FOREIGN KEY(Customer_FK) REFERENCES Customer(ID) NOCHECK;
+
+insert into  Bank(ID,Name,Address) values (1,'BCR','Bucuresti');
+insert into  Bank(ID,Name,Address) values (2,'BT','Bucuresti');
+insert into  Bank(ID,Name,Address) values (3,'CEC','Bucuresti');
+
+
+insert into  Customer(ID, Name) values (1,'Mihai Blandu');
+insert into  Customer(ID, Name) values (2,'John Doe');
+insert into  Customer(ID, Name) values (3,'Max Smith');
+insert into  Customer(ID, Name) values (4,'Anna Black');
+insert into  Customer(ID, Name) values (5,'Kent White');
+insert into  Customer(ID, Name) values (6,'Morgan Freeman');
+insert into  Bank_Customer(Bank_FK, Customer_FK) values (1,1);
+insert into  Bank_Customer(Bank_FK, Customer_FK) values (1,2);
+insert into  Bank_Customer(Bank_FK, Customer_FK) values (2,3);
+insert into  Bank_Customer(Bank_FK, Customer_FK) values (2,4);
+insert into  Bank_Customer(Bank_FK, Customer_FK) values (3,5);
+insert into  Bank_Customer(Bank_FK, Customer_FK) values (3,6);
+
+
+
+
+CREATE TABLE DOG_SECONDARY_A(
+    ID INTEGER NOT NULL,
+    name VARCHAR(255),
+    age INTEGER,
+    weight DOUBLE
+);
+ALTER TABLE DOG_SECONDARY_A ADD CONSTRAINT CONSTRAINT_DOG_SECONDARY_A PRIMARY KEY(ID);
+
+CREATE TABLE DOG_SECONDARY_B(
+                                ID INTEGER NOT NULL,
+                                name VARCHAR(255),
+                                age INTEGER,
+                                weight DOUBLE
+);
+ALTER TABLE DOG_SECONDARY_B ADD CONSTRAINT CONSTRAINT_DOG_SECONDARY_B PRIMARY KEY(ID);
+
+CREATE TABLE meal(
+                                ID INTEGER NOT NULL,
+                                name VARCHAR(255),
+                                description VARCHAR(255),
+                                price INTEGER
+);
+ALTER TABLE meal ADD CONSTRAINT CONSTRAINT_MEAL PRIMARY KEY(ID);
+CREATE TABLE Allergens(
+                     id INTEGER NOT NULL,
+                     peanuts INTEGER(1),
+                     celery INTEGER(1),
+                     SESAME_SEEDS INTEGER(1)
+);
+ALTER TABLE Allergens ADD CONSTRAINT CONSTRAINT_Allergens PRIMARY KEY(id);
+insert into meal values (1,'name1','description',100);
+insert into meal values (2,'name2','description',100);
+insert into meal values (3,'name3','description',100);
+insert into meal values (4,'name4','description',100);
+insert into Allergens values (1,1,1,1);
+insert into Allergens values (2,1,0,1);
+insert into Allergens values (3,1,1,1);
+insert into Allergens values (4,1,0,0);
+--
+--
+--
+CREATE TABLE users(
+                          id INTEGER NOT NULL,
+                          first_name VARCHAR (40),
+                          middle_name VARCHAR (40),
+                          last_name VARCHAR (40),
+                          email VARCHAR (100),
+                          house_number VARCHAR (100),
+                          street VARCHAR (100),
+                          city VARCHAR (100),
+                          state VARCHAR (100),
+                          country VARCHAR (100),
+                          zip_code VARCHAR (40),
+                          primary key (id)
+);
+--ALTER TABLE users ADD CONSTRAINT CONSTRAINT_users_id PRIMARY KEY(ID);
