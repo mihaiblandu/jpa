@@ -113,11 +113,7 @@ public class AppStartupRunner implements ApplicationRunner {
         StudentB studentB = new StudentB("jimmy");
         studentRepository.save(studentB);
 
-        studentB.setAddress(new jpa.tutorial.jpa_repo.entities.Address("here","there","city"));
-        StudentB student = studentRepository.findAll().get(3);
-        passport.setStudent(student);
-        student.setPassport(passport);
-        studentRepository.update(student);
+
 
     }
 }
